@@ -26,8 +26,22 @@ require('mason-lspconfig').setup({
       local lua_opts = lsp_zero.nvim_lua_ls()
       require('lspconfig').lua_ls.setup(lua_opts)
     end,
+    matlab_ls = function()
+        require('lspconfig').matlab_ls.setup {
+            settings = {
+                matlab = {
+                    installPath = "~/.MATLAB/R2023b/",
+                    randomKey = 2
+                },
+                cmd = {"~/.local/share/nvim/mason/bin/matlab-language-server", "--stdio"},
+                single_file_support = true
+            }
+        }
+    end
   }
 })
+
+
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}

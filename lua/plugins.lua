@@ -12,7 +12,6 @@ return require('packer').startup(function (use)
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
-	
     use({ 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'}})
 	use("nvim-treesitter/playground")
 
@@ -37,7 +36,6 @@ return require('packer').startup(function (use)
 			{'L3MON4D3/LuaSnip'},
 			{'hrsh7th/cmp-buffer'},
 			{'hrsh7th/cmp-path'},
-		
         }
 	}
 
@@ -50,4 +48,3 @@ return require('packer').startup(function (use)
 
     use {'catppuccin/nvim', as="catppuccin"}
 end)
-            

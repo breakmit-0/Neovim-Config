@@ -2,6 +2,7 @@ require("plugins")
 require("remap")
 
 
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
