@@ -1,3 +1,4 @@
+
 -- VIM config
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -28,8 +29,20 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = ""
 
 
-vim.g.mapleader = " " -- setting the map leader resets <leader> keybinds
+vim.keymap.set('i', '"', '""<left>');
+vim.keymap.set('i', "'", "''<left>");
+vim.keymap.set('i', '(', '()<left>');
+vim.keymap.set('i', '[', '[]<left>');
+vim.keymap.set('i', '{', '{}<left>');
+-- disable netrw at the very start of your init.lua
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
-vim.keymap.set('i', "<C-f><C-c>", "<C-x><C-f>")
 
+-- empty setup using defaults
+-- require("nvim-tree").setup()
+
+
+
+vim.g.mapleader = " " -- setting the map leader resets keybinds 
 

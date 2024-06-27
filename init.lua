@@ -22,28 +22,21 @@ require("lazy").setup {
     { "neovim/nvim-lspconfig" },
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
-    { "hrsh7th/nvim-cmp" },
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "L3MON4D3/LuaSnip" },
-    { "terrortylor/nvim-comment" },
-    { 'windwp/nvim-autopairs', event = "InsertEnter" },
-    {'nvim-telescope/telescope.nvim', tag = '0.1.6', dependencies = { 'nvim-lua/plenary.nvim' } },
-    {'FelipeLema/cmp-async-path'}
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-nvim-lsp",
+    "L3MON4D3/LuaSnip",
 }
 
-
+require("mason").setup {};
+require("mason-lspconfig").setup {};
 
 require("vim_setup")
+
 local ps = "plugin_setup."
 
-require(ps .. "comment");
 require(ps .. "nvim_tree");
 require(ps .. "catpuccin");
 require(ps .. "lsp");
 require(ps .. "treesitter");
-require(ps .. "telescope");
-require("nvim-autopairs").setup {}
 
 vim.keymap.set("n", "<leader>tt", ":NvimTreeToggle<CR>")
-
-vim.cmd('set shell=zsh')

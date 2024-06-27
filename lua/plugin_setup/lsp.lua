@@ -37,77 +37,13 @@ require("mason-lspconfig").setup {
     },
 }
 
-
-local function file_exists(name)
-   local f=io.open(name,"r")
-   if f~=nil then io.close(f) return true else return false end
-end
-
-
-require("lspconfig").zls.setup {
-
-    on_new_config = function (new_config, root_dir)
-        local zls_path = root_dir .. "/zls.json"
-
-        if file_exists(zls_path)
-        then new_config.cmd = {"zls", "--config-path", zls_path}
-        else new_config.cmd = {"zls"}
-        end
-    end
-}
-
-
 local cmp = require("cmp")
-local luasnip = require("luasnip");
 
 cmp.setup {
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'async_path' },
-    }, {
-        {name = 'buffer'}
-    }),
+    sources = { { name = 'nvim_lsp' } },
     mapping = cmp.mapping.preset.insert {
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
         ['<C-Space>'] = cmp.mapping.complete(),
-        ["<C-j>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            else
-                fallback()
-            end
-        end),
-        ["<C-k>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            else
-                fallback()
-            end
-        end),
-
-        ["<C-l>"] = cmp.mapping(function (fallback)
-            if luasnip.locally_jumpable(1) then
-                luasnip.jump(1)
-            else
-                fallback()
-            end
-        end),
-
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
-            if cmp.visible() then
-                local entry = cmp.get_selected_entry()
-                if not entry then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                end
-                cmp.confirm()
-            elseif luasnip.locally_jumpable(1) then
-                luasnip.jump(1)
-            else
-                fallback()
-            end
-        end, { "i", "s", "c", }),
     },
     snippet = {
         expand = function(args)
@@ -115,11 +51,3 @@ cmp.setup {
         end
     }
 }
-
-cmp.setup.cmdline({'/', '?'}, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = { {name = 'buffer'}}
-})
-
--- fix completions in command mode
-vim.keymap.set('c', '<tab>', '<C-z>', { silent = false })
