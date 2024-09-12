@@ -1,6 +1,8 @@
 -- require("plugins")
 -- require("remap")
 
+
+
 -- bootstrap lazy.nvim, maybe move to a module later
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -25,7 +27,15 @@ require("lazy").setup {
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lsp",
     "L3MON4D3/LuaSnip",
+    { 'nvim-telescope/telescope.nvim', tag = '0.1.8',        dependencies = { 'nvim-lua/plenary.nvim' } },
+    { "terrortylor/nvim-comment" },
+    { 'windwp/nvim-autopairs',         event = "InsertEnter" },
+    { 'FelipeLema/cmp-async-path' },
 }
+
+
+
+
 
 require("mason").setup {};
 require("mason-lspconfig").setup {};
@@ -38,36 +48,8 @@ require(ps .. "nvim_tree");
 require(ps .. "catpuccin");
 require(ps .. "lsp");
 require(ps .. "treesitter");
+require(ps .. "telescope");
 
-vim.keymap.set("n", "<leader>tt", ":NvimTreeToggle<CR>")
-
-local sortfn = function (a, b)
-    if a.type == "directory" then
-        if b.type == "directory" then
-            return a.name < b.name
-        else
-            return true;
-        end
-    elseif b.type == "directory" then
-        return false;
-    elseif (a.extension ~= b.extension) then
-        return a.extension < b.extension
-    else
-        return a.name < b.name
-    end
-
-end
-
--- empty setup using defaults
-require("nvim-tree").setup {
-    sort = {
-        sorter = -- "extension",
-        function (nodes)
-            table.sort(nodes, sortfn)
-        end
-    },
-}
-
-
+require("nvim-autopairs").setup {};
 
 vim.cmd("source ~/.config/nvim/asar.vim")

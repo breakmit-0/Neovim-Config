@@ -28,21 +28,23 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = ""
 
-
-vim.keymap.set('i', '"', '""<left>');
-vim.keymap.set('i', "'", "''<left>");
-vim.keymap.set('i', '(', '()<left>');
-vim.keymap.set('i', '[', '[]<left>');
-vim.keymap.set('i', '{', '{}<left>');
 -- disable netrw at the very start of your init.lua
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
 
--- empty setup using defaults
--- require("nvim-tree").setup()
-
-
 
 vim.g.mapleader = " " -- setting the map leader resets keybinds 
+
+vim.keymap.set("n", "<C-j>", "ddp");
+vim.keymap.set("n", "<C-k>", "ddkP");
+
+-- sourround pairs in visual mode
+-- vim.keymap.set("v", "(", "xi(<Esc>pa)<Esc>");
+-- vim.keymap.set("v", "{", "xi{<Esc>pa}<Esc>");
+-- vim.keymap.set("v", "[", "xi[<Esc>pa]<Esc>");
+-- vim.keymap.set("v", "|", "xi|<Esc>pa|<Esc>");
+-- vim.keymap.set("v", "'", "xi'<Esc>pa'<Esc>");
+-- vim.keymap.set("v", "<C-\">", "xi\"<Esc>pa\"<Esc>");
+
 
